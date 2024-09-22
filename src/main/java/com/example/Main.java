@@ -20,21 +20,21 @@ public class Main {
         }
 
         // Отримання найдовшого проекту
-        List<String[]> longestProjects = queryService.findLongestProject();
-        for (String[] project : longestProjects) {
-            System.out.println("Project ID: " + project[0] + ", Month Count: " + project[1]);
+        List<LongestProject> longestProjects = queryService.findLongestProject();
+        for (LongestProject project : longestProjects) {
+            System.out.println(project);
         }
 
         // Отримання працівника з максимальним заробітком
-        List<String[]> maxSalaryWorkers = queryService.findMaxSalaryWorker();
-        for (String[] worker : maxSalaryWorkers) {
-            System.out.println("Worker Name: " + worker[0] + ", Salary: " + worker[1]);
+        List<MaxSalaryWorker> maxSalaryWorkers = queryService.findMaxSalaryWorker();
+        for (MaxSalaryWorker worker : maxSalaryWorkers) {
+            System.out.println(worker);
         }
 
         // Отримання наймолодших і найстарших працівників
-        List<String[]> youngestEldestWorkers = queryService.findYoungestEldestWorkers();
-        for (String[] worker : youngestEldestWorkers) {
-            System.out.println(worker[0] + " Worker Name: " + worker[1] + ", Birthday: " + worker[2]);
+        List<Worker> youngestEldestWorkers = queryService.findYoungestEldestWorkers();
+        for (Worker worker : youngestEldestWorkers) {
+            System.out.println(worker);
         }
     }
 }

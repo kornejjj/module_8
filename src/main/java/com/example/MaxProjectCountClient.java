@@ -1,5 +1,6 @@
 package com.example;
 
+
 public class MaxProjectCountClient {
     private String name;
     private int projectCount;
@@ -19,4 +20,10 @@ public class MaxProjectCountClient {
     public void setProjectCount(int projectCount) {
         this.projectCount = projectCount;
     }
+
+    @Override
+    public String toString() {
+        return "Client Name: " + name + ", Project Count: " + projectCount;
+    }
 }
+
