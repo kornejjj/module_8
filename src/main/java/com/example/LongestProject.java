@@ -4,7 +4,7 @@ public class LongestProject {
     private int id;
     private int monthCount;
 
-    public LongestProject(int id, int monthCount) {
+    public LongestProject() {
         this.id = id;
         this.monthCount = monthCount;
     }
@@ -20,5 +20,13 @@ public class LongestProject {
     @Override
     public String toString() {
         return "Project ID: " + id + ", Month Count: " + monthCount;
+    }
+
+    public void setMonthCount(int monthCount) {
+
+    }
+
+    public void setId(int id) {
+
     }
 }
