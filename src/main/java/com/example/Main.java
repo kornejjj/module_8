@@ -4,37 +4,31 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Ініціалізація бази даних
-        DatabaseInitService.main(args);
+        // Ініціалізація бази даних через Flyway
+        Database.getInstance(); // Запускає Flyway, який виконає міграції
 
-        // Наповнення бази даних
-        DatabasePopulateService.main(args);
+        ClientService clientService = new ClientService();
 
-        // Приклад використання запитів
-        DatabaseQueryService queryService = new DatabaseQueryService();
+        try {
+            long clientId = clientService.create("New Client");
+            System.out.println("Client created with ID: " + clientId);
 
-        // Отримання максимальних проектів клієнтів
-        List<MaxProjectCountClient> maxProjectsClients = queryService.findMaxProjectsClient();
-        for (MaxProjectCountClient client : maxProjectsClients) {
-            System.out.println("Client Name: " + client.getName() + ", Project Count: " + client.getProjectCount());
-        }
+            String clientName = clientService.getById(clientId);
+            System.out.println("Client name: " + clientName);
 
-        // Отримання найдовшого проекту
-        List<LongestProject> longestProjects = queryService.findLongestProject();
-        for (LongestProject project : longestProjects) {
-            System.out.println(project);
-        }
+            clientService.setName(clientId, "Updated Client");
+            System.out.println("Client name updated.");
 
-        // Отримання працівника з максимальним заробітком
-        List<MaxSalaryWorker> maxSalaryWorkers = queryService.findMaxSalaryWorker();
-        for (MaxSalaryWorker worker : maxSalaryWorkers) {
-            System.out.println(worker);
-        }
+            List<Client> clients = clientService.listAll();
+            for (Client client : clients) {
+                System.out.println("Client ID: " + client.getId() + ", Name: " + client.getName());
+            }
 
-        // Отримання наймолодших і найстарших працівників
-        List<Worker> youngestEldestWorkers = queryService.findYoungestEldestWorkers();
-        for (Worker worker : youngestEldestWorkers) {
-            System.out.println(worker);
+            clientService.deleteById(clientId);
+            System.out.println("Client deleted.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
