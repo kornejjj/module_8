@@ -1,4 +1,7 @@
+
 package com.example;
+
+import org.flywaydb.core.Flyway;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +13,16 @@ public class Database {
 
     private Database() {
         try {
+            // Підключення до бази даних
             connection = DriverManager.getConnection("jdbc:h2:~/test138", "user", "password");
+
+            // Налаштування Flyway
+            Flyway flyway = Flyway.configure()
+                    .dataSource("jdbc:h2:~/test", "user", "password")
+                    .load();
+            // Запуск міграцій
+            flyway.migrate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -23,7 +35,7 @@ public class Database {
         return instance;
     }
 
-    public Connection getConnection() {
+    public java.sql.Connection getConnection() {
         return connection;
     }
 }
